@@ -1,3 +1,4 @@
+const { Router } = require('express');
 const express = require('express')
 const app = express()
 const port = 3000
@@ -15,6 +16,10 @@ app.get('/', (req, res) => {
   res.sendfile(path.join(__dirname,'public', 'index.html'));
   //projeto-crud/public/index.html ==> localhost:3000/
 })
+
+const apiRoutes = require('./routes/api');//buscando as rotas
+app.use(express.json());//requisições do front virão no formato JSON
+app.use('/api/users', apiRoutes);//definido as rotas 
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
